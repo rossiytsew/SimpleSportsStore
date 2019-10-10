@@ -26,6 +26,8 @@ namespace SimpleSportsStore
                     Configuration["Data:SimpleSportsStoreProducts:ConnectionString"]));
             services.AddTransient<IProductRepository, EFProductRepository>();
             services.AddMvc();
+            services.AddMemoryCache();
+            services.AddSession();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -33,12 +35,13 @@ namespace SimpleSportsStore
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
             app.UseStaticFiles();
+            app.UseSession();
             app.UseMvc(routes => 
             {
                 routes.MapRoute(
                     name: null,
                     template: "{category}/Page{productPage:int}",
-                    defaults: new { Controller = "Product", action = "List"});
+                    defaults: new { Controller = "Product", action = "List" });
                 routes.MapRoute(
                     name: null,
                     template: "Page{productPage:int}",
