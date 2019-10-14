@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SimpleSportsStore.Models;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SimpleSportsStore.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
         private IProductRepository repository;
